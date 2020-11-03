@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.paulomdsbh.avanco.entidades.Cliente;
 import com.paulomdsbh.avanco.entidades.Pedido;
+import com.paulomdsbh.avanco.entidades.enums.StatusPedido;
 import com.paulomdsbh.avanco.repositorios.ClienteRepositorio;
 import com.paulomdsbh.avanco.repositorios.PedidoRepositorio;
 
@@ -28,8 +29,8 @@ public class TestConfig implements CommandLineRunner{
 		Cliente c1 = new Cliente(null,"Marcos ","marcola@gmail.com");
 		Cliente c2 = new Cliente(null,"Maria Joana","mariazinha@gmail.com");
 		
-		Pedido p1 = new Pedido(null, Instant.parse("2020-11-03T16:10:07Z"), c1);
-		Pedido p2 = new Pedido(null, Instant.parse("2020-11-03T16:15:17Z"), c2);
+		Pedido p1 = new Pedido(null, Instant.parse("2020-11-03T16:10:07Z"), StatusPedido.FATURADO, c1);
+		Pedido p2 = new Pedido(null, Instant.parse("2020-11-03T16:15:17Z"), StatusPedido.AGUARDANDO_PAGAMENTO,c2);
 		
 		clienteRepositorio.saveAll(Arrays.asList(c1,c2));
 		pedidoRepositorio.saveAll(Arrays.asList(p1,p2));
