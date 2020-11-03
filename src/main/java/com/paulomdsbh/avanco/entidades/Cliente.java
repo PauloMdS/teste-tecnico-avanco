@@ -1,11 +1,16 @@
 package com.paulomdsbh.avanco.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable{
@@ -17,6 +22,10 @@ public class Cliente implements Serializable{
 	private Long id;
 	private String nome;
 	private String email;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
 		
@@ -53,6 +62,10 @@ public class Cliente implements Serializable{
 		this.email = email;
 	}
 
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,5 +90,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
