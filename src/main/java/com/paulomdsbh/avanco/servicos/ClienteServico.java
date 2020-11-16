@@ -11,16 +11,21 @@ import com.paulomdsbh.avanco.repositorios.ClienteRepositorio;
 
 @Service
 public class ClienteServico {
-	
+
 	@Autowired
 	private ClienteRepositorio repositorio;
-	
-	public List<Cliente> findAll(){
+
+	public List<Cliente> findAll() {
 		return repositorio.findAll();
 	}
-	
+
 	public Cliente findById(Long id) {
 		Optional<Cliente> obj = repositorio.findById(id);
 		return obj.get();
 	}
+
+	public Cliente inserir(Cliente obj) {
+		return repositorio.save(obj);
+	}
+
 }

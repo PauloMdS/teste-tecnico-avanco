@@ -11,14 +11,14 @@ import com.paulomdsbh.avanco.repositorios.PedidoRepositorio;
 
 @Service
 public class PedidoServico {
-	
+
 	@Autowired
 	private PedidoRepositorio repositorio;
-	
-	public List<Pedido> findAll(){
+
+	public List<Pedido> findAll() {
 		return repositorio.findAll();
 	}
-	
+
 	public Pedido findById(Long id) {
 		Optional<Pedido> obj = repositorio.findById(id);
 		return obj.get();

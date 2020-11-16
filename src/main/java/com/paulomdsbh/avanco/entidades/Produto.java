@@ -1,27 +1,35 @@
 package com.paulomdsbh.avanco.entidades;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nome;
 	private String descricao;
 	private Double preco;
 
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> items = new HashSet<>();
+
 	public Produto() {
-		
+
 	}
 
 	public Produto(Long id, String nome, String descricao, Double preco) {
@@ -64,6 +72,15 @@ public class Produto implements Serializable{
 		this.preco = preco;
 	}
 
+	@JsonIgnore
+	public Set<Pedido> getPedidos() {
+		Set<Pedido> set = new HashSet<>();
+		for (ItemPedido x : items) {
+			set.add(x.getPedido());
+		}
+		return set;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,5 +105,5 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }

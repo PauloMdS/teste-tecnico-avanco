@@ -1,41 +1,42 @@
 package com.paulomdsbh.avanco.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Cliente implements Serializable {
+public class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
-	private String email;
+
+	private Instant momento;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> pedidos = new ArrayList<>();
+	@OneToOne
+	@MapsId
+	private Pedido pedido;
 
-	public Cliente() {
+	public Pagamento() {
 
 	}
 
-	public Cliente(Long id, String nome, String email) {
+	public Pagamento(Long id, Instant momento, Pedido pedido) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.email = email;
+		this.momento = momento;
+		this.pedido = pedido;
 	}
 
 	public Long getId() {
@@ -46,24 +47,20 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Instant getMomento() {
+		return momento;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setMomento(Instant momento) {
+		this.momento = momento;
 	}
 
-	public String getEmail() {
-		return email;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	@Override
@@ -82,7 +79,7 @@ public class Cliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Pagamento other = (Pagamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

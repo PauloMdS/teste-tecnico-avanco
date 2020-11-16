@@ -15,20 +15,20 @@ import com.paulomdsbh.avanco.servicos.ProdutoServico;
 @RestController
 @RequestMapping(value = "/produtos")
 public class ProdutoRecurso {
-	
+
 	@Autowired
 	private ProdutoServico servico;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Produto>> findall(){
+	public ResponseEntity<List<Produto>> findall() {
 		List<Produto> lista = servico.findAll();
-				
+
 		return ResponseEntity.ok().body(lista);
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Produto> findById(@PathVariable Long id){
-		
+	public ResponseEntity<Produto> findById(@PathVariable Long id) {
+
 		Produto obj = servico.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}

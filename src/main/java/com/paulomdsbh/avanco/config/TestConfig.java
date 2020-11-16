@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.paulomdsbh.avanco.entidades.Cliente;
 import com.paulomdsbh.avanco.entidades.ItemPedido;
+import com.paulomdsbh.avanco.entidades.Pagamento;
 import com.paulomdsbh.avanco.entidades.Pedido;
 import com.paulomdsbh.avanco.entidades.Produto;
 import com.paulomdsbh.avanco.entidades.enums.StatusPedido;
@@ -55,5 +56,11 @@ public class TestConfig implements CommandLineRunner{
 		ItemPedido ip3 = new ItemPedido(p2, pr1, 7, pr1.getPreco());
 		
 		itemPedidoRepositorio.saveAll(Arrays.asList(ip1, ip2, ip3));
+		
+		Pagamento pag1 = new Pagamento(null, Instant.parse("2020-11-03T19:05:01Z"), p1);
+		
+		p1.setPagamento(pag1);
+		
+		pedidoRepositorio.save(p1);
 	}
 }
