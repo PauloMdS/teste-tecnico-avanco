@@ -30,6 +30,7 @@ public class Pedido implements Serializable {
 	private Instant momento;
 
 	private Integer status;
+
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;

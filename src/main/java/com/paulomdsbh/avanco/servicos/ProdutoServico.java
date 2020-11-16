@@ -23,4 +23,23 @@ public class ProdutoServico {
 		Optional<Produto> obj = repositorio.findById(id);
 		return obj.get();
 	}
+	public Produto inserir(Produto obj) {
+		return repositorio.save(obj);
+	}
+
+	public void deletar(Long id) {
+		repositorio.deleteById(id);
+	}
+	
+	public Produto atualizar(Long id, Produto obj) {
+		Produto entidade = repositorio.getOne(id);
+		atualizarDados(entidade, obj);
+		return repositorio.save(entidade);
+	}
+
+	private void atualizarDados(Produto entidade, Produto obj) {
+		entidade.setNome(obj.getNome());
+		entidade.setDescricao(obj.getDescricao());
+		entidade.setPreco(obj.getPreco());
+	}
 }

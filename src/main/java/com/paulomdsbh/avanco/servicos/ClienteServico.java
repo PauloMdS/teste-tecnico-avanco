@@ -28,4 +28,18 @@ public class ClienteServico {
 		return repositorio.save(obj);
 	}
 
+	public void deletar(Long id) {
+		repositorio.deleteById(id);
+	}
+	
+	public Cliente atualizar(Long id, Cliente obj) {
+		Cliente entidade = repositorio.getOne(id);
+		atualizarDados(entidade, obj);
+		return repositorio.save(entidade);
+	}
+
+	private void atualizarDados(Cliente entidade, Cliente obj) {
+		entidade.setNome(obj.getNome());
+		entidade.setEmail(obj.getEmail());
+	}
 }
