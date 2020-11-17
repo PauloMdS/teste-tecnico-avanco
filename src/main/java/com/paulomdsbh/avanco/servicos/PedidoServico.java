@@ -23,6 +23,10 @@ public class PedidoServico {
 		Optional<Pedido> obj = repositorio.findById(id);
 		return obj.get();
 	}
+	
+	public Pedido inserir(Pedido obj) {
+		return repositorio.save(obj);
+	}
 
 	public void deletar(Long id) {
 		repositorio.deleteById(id);
